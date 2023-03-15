@@ -170,7 +170,9 @@ const Register = () => {
            {isLoading&&<CircularProgress className="loading"/>           }
           <p className="secondary-action">
             Already have an account?{" "}
-            <Link className="link" to="/login">Login here </Link>
+            <a className="link" href="#">
+              Login here
+             </a>
           </p>
         </Stack>
       </Box>
