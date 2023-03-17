@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 
+
 const Register = () => {
   const { enqueueSnackbar } = useSnackbar();
   let [isLoading, setIsLoading] = useState(false);
@@ -128,7 +129,7 @@ const Register = () => {
       justifyContent="space-between"
       minHeight="100vh"
     >
-      <Header hasHiddenAuthButtons />
+      <Header hasHiddenAuthButtons={true} />
       <Box className="content">
         <Stack spacing={2} className="form">
           <h2 className="title">Register</h2>
@@ -170,9 +171,9 @@ const Register = () => {
            {isLoading&&<CircularProgress className="loading"/>           }
           <p className="secondary-action">
             Already have an account?{" "}
-            <a className="link" href="#">
+            <Link className="link" to="/login">
               Login here
-             </a>
+            </Link>
           </p>
         </Stack>
       </Box>
