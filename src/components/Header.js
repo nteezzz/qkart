@@ -23,6 +23,7 @@ const Header = ({ children, hasHiddenAuthButtons}) => {
         <Box className="header-title">
             <img src="logo_light.svg" alt="QKart-icon"></img>
         </Box>
+        {children}
         <Button
           className="explore-button"
           startIcon={<ArrowBackIcon />}
@@ -44,17 +45,15 @@ const Header = ({ children, hasHiddenAuthButtons}) => {
         <Box className="header-title">
             <img src="logo_light.svg" alt="QKart-icon"></img>
         </Box>
+        {children}
         <Box>
         <Stack direction="row" spacing={2} alignItems='center'>
   <Avatar src="avatar.png" alt={username}> </Avatar>
   <p>{username}</p>
-  <Button variant="text" className="explore-button" onClick={logout}>
+  <Button variant="text" name="logout" className="explore-button" onClick={logout}>
                 logout 
         </Button>
 </Stack>
-        
-        
-    
         </Box>
         
       </Box>
@@ -68,7 +67,9 @@ const Header = ({ children, hasHiddenAuthButtons}) => {
         <Box className="header-title">
             <img src="logo_light.svg" alt="QKart-icon"></img>
         </Box>
+        {children}
         <Box>
+        
         <Button className="explore-button" variant="text" onClick={()=>{history.push("/login")}}>
                 Login
         </Button>
