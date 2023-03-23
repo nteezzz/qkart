@@ -355,10 +355,10 @@ const Products = () => {
                   <h5>No products found</h5>
                 </div>
               ) : (
-                <Grid container spacing={2} className="grid-container">
+                <Grid container  spacing={2} className="grid-container" >
                   {productArray.map((product) => {
                     return (
-                      <Grid item xs={6} md={3} key={product._id}>
+                      <Grid item xs={6} md={3} in key={product._id}>
                         <ProductCard
                           product={product}
                           // handleAddToCart={() =>
@@ -410,7 +410,7 @@ const Products = () => {
                 <h5>No products found</h5>
               </div>
             ) : (
-              <Grid container spacing={2} className="grid-container">
+              <Grid container spacing={2} className="grid-container" margin={2}>
                 {productArray.map((product) => {
                   return (
                     <Grid item xs={6} md={3} key={product._id}>
