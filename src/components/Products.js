@@ -15,8 +15,8 @@ import Header from "./Header";
 import "./Products.css";
 import ProductCard from "./ProductCard";
 import { debounce } from "@mui/material";
-//import Cart from "./Cart";
-//import { generateCartItemsFrom } from "./Cart";
+import Cart from "./Cart";
+import { generateCartItemsFrom } from "./Cart";
 // Definition of Data Structures used
 /**
  * @typedef {Object} Product - Data on product available to buy
@@ -84,12 +84,12 @@ const Products = () => {
     if (productArray === null) {
       performAPICall();
     }
-    // if (cartArray === null && localStorage.getItem("username")) {
-    //   fetchCart(localStorage.getItem("token"));
-    // }
-    // if (cartArray && productArray) {
-    //   setCartItems(generateCartItemsFrom(cartArray, productArray));
-    // }
+    if (cartArray === null && localStorage.getItem("username")) {
+      fetchCart(localStorage.getItem("token"));
+    }
+    if (cartArray && productArray) {
+      setCartItems(generateCartItemsFrom(cartArray, productArray));
+    }
   }, [cartArray, productArray]);
   const performAPICall = async () => {
     const url = config.endpoint + "/products";
@@ -262,42 +262,42 @@ const Products = () => {
    *      "message": "Product doesn't exist"
    * }
    */
-  // const addToCart = async (
-  //   token,
-  //   items,
-  //   products,
-  //   productId,
-  //   qty,
-  //   options = { preventDuplicate: false }
-  // ) => {
-  //   if (!localStorage.getItem("username")) {
-  //     enqueueSnackbar("Login to add an item to the Cart", {
-  //       variant: "warning",
-  //     });
-  //   } else if (options.preventDuplicate && isItemInCart(items, productId)) {
-  //     enqueueSnackbar(
-  //       "Item already in cart. Use the cart sidebar to update quantity or remove item",
-  //       { variant: "warning" }
-  //     );
-  //   } else {
-  //     axios
-  //       .post(
-  //         config.endpoint + "/cart",
-  //         {
-  //           productId: productId,
-  //           qty: qty,
-  //         },
-  //         {
-  //           headers: {
-  //             Authorization: "Bearer " + token,
-  //           },
-  //         }
-  //       )
-  //       .then((res) => {
-  //         setCartItems(generateCartItemsFrom(res.data, products));
-  //       });
-  //   }
-  // };
+  const addToCart = async (
+    token,
+    items,
+    products,
+    productId,
+    qty,
+    options = { preventDuplicate: false }
+  ) => {
+    if (!localStorage.getItem("username")) {
+      enqueueSnackbar("Login to add an item to the Cart", {
+        variant: "warning",
+      });
+    } else if (options.preventDuplicate && isItemInCart(items, productId)) {
+      enqueueSnackbar(
+        "Item already in cart. Use the cart sidebar to update quantity or remove item",
+        { variant: "warning" }
+      );
+    } else {
+      axios
+        .post(
+          config.endpoint + "/cart",
+          {
+            productId: productId,
+            qty: qty,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+        .then((res) => {
+          setCartItems(generateCartItemsFrom(res.data, products));
+        });
+    }
+  };
   return (
     <div>
       <Header hasHiddenAuthButtons={false}>
@@ -361,16 +361,16 @@ const Products = () => {
                       <Grid item xs={6} md={3} in key={product._id}>
                         <ProductCard
                           product={product}
-                          // handleAddToCart={() =>
-                          //   addToCart(
-                          //     localStorage.getItem("token"),
-                          //     cartArray,
-                          //     productArray,
-                          //     product._id,
-                          //     1,
-                          //     { preventDuplicate: true }
-                          //   )
-                          // }
+                          handleAddToCart={() =>
+                            addToCart(
+                              localStorage.getItem("token"),
+                              cartArray,
+                              productArray,
+                              product._id,
+                              1,
+                              { preventDuplicate: true }
+                            )
+                          }
                         />
                       </Grid>
                     );
@@ -378,13 +378,13 @@ const Products = () => {
                 </Grid>
               )}
             </Grid>
-            {/* <Grid item md={3} xs={12} className="cart-background" mt={2}>
-              {/* <Cart
+            <Grid item md={3} xs={12} className="cart-background" mt={2}>
+              <Cart
                 products={productArray}
                 items={cartItems}
-               // handleQuantity={addToCart}
+                handleQuantity={addToCart}
               /> 
-            </Grid> */}
+            </Grid> 
           </Grid>
         </div>
       ) : (
@@ -416,16 +416,16 @@ const Products = () => {
                     <Grid item xs={6} md={3} key={product._id}>
                       <ProductCard
                         product={product}
-                        //handleAddToCart={() =>
-                          // addToCart(
-                          //   localStorage.getItem("token"),
-                          //   cartArray,
-                          //   productArray,
-                          //   product._id,
-                          //   1,
-                          //   { preventDuplicate: true }
-                          // )
-                        //}
+                        handleAddToCart={() =>
+                          addToCart(
+                            localStorage.getItem("token"),
+                            cartArray,
+                            productArray,
+                            product._id,
+                            1,
+                            { preventDuplicate: true }
+                          )
+                        }
                       />
                     </Grid>
                   );

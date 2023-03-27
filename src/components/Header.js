@@ -76,7 +76,6 @@ const Header = ({ children, hasHiddenAuthButtons}) => {
         <Button className="button" variant="contained" onClick={()=>{history.push("/register")}}>
                 Register 
         </Button>
-    
         </Box>
         
       </Box>
