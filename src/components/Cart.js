@@ -160,26 +160,28 @@ const ItemQuantity = ({ value, handleAdd, handleDelete }) => {
 
 /**
  * Component to display the Cart view
- *
+ * 
  * @param { Array.<Product> } products
  *    Array of objects with complete data of all available products
- *
+ * 
  * @param { Array.<Product> } items
  *    Array of objects with complete data on products in cart
- *
+ * 
  * @param {Function} handleDelete
  *    Current quantity of product in cart
- *
+ * 
  * @param {Boolean} isReadOnly
  *    If product quantity on cart is to be displayed as read only without the + - options to change quantity
  * 
- *
  */
-const Cart = ({ products, items = [], handleQuantity, isReadOnly }) => {
+const Cart = ({
+  products,
+  items = [],
+  handleQuantity,
+  isReadOnly
+}) => {
+
   const history = useHistory();
-
-
-
   if (!items.length) {
     return (
       <Box className="cart empty">
